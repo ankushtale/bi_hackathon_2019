@@ -1,6 +1,5 @@
 from PyPDF2 import PdfFileReader
 import os
-from utils import unique_values_in_list
 
 annotations = ['/StrikeOut', '/Popup', '/FreeText', '/Line']
 
@@ -15,7 +14,7 @@ def is_annotation_present(path):
             page = pdf.getPage(i)
             try:
                 for annot in page['/Annots']:
-                    if annot.getObject()['/Subtype'] == '/Text':
+                    if annot.getObject()['/Subtype'] in annotations:
                         return True
                 return False
             except:
@@ -46,9 +45,9 @@ def get_list_of_annotations(path):
                 for annot in page['/Annots']:
                     sub_type = annot.getObject()['/Subtype']
                     if sub_type in annotations:
-                        list_of_annotations.append(sub_type)
+                        list_of_annotations.append(str(sub_type).replace('/', '') + ' on Page ' + str(i + 1))
             finally:
-                return unique_values_in_list(list_of_annotations)
+                return list_of_annotations
 
 
 def list_annotations_present(files_to_read):

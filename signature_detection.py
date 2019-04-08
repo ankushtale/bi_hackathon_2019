@@ -1,5 +1,5 @@
 from typing import NoReturn, Tuple
-
+import os
 import numpy as np
 from PIL import Image
 from pdf2image import convert_from_path
@@ -7,6 +7,25 @@ from scipy import ndimage as nd
 from scipy.linalg import norm
 from skimage.color import rgb2gray
 from skimage.filters import gabor_kernel
+
+signature_location = {
+    'ABCD': {
+        'page': 1,
+        'bounding_box': (700, 1600, 1700, 2200)
+    },
+    'PWRS': {
+        'page': 1,
+        'bounding_box': (700, 1600, 1700, 2200)
+    },
+    'DFGH': {
+        'page': 1,
+        'bounding_box': (700, 1600, 1700, 2200)
+    },
+    'EDFGH': {
+        'page': 1,
+        'bounding_box': (700, 1600, 1700, 2200)
+    }
+}
 
 
 def convert_to_greyscale(img: Image) -> np.array:
@@ -76,6 +95,7 @@ def detect_signature(path1: str, path2: str, page_no: int, bounding_box: Tuple) 
     :param bounding_box:
     :return:
     '''
+
     images1 = convert_from_path(path1)
     images2 = convert_from_path(path2)
     img_1 = images1[page_no-1]
@@ -90,7 +110,26 @@ def detect_signature(path1: str, path2: str, page_no: int, bounding_box: Tuple) 
     return z_norm > 1000 # empirical value
 
 
-# test function
-if __name__ == "__main__":
-    isSigned = detect_signature("sample.pdf", "sample-modified.pdf", 6, (700, 1600, 1700, 2200))
-    print(isSigned)
+def is_signature_present(files_to_read: list):
+
+    is_signature_present_flag = dict()
+
+    for file in files_to_read:
+        file_name = os.path.basename(file)
+        prefix = file_name.split('_')[0]
+
+        if prefix in signature_location.keys():
+            is_signature_present_flag[file_name] = detect_signature(file,
+                                                                    file,
+                                                                    signature_location[prefix]['page'],
+                                                                    signature_location[prefix]['bounding_box'])
+        else:
+            is_signature_present_flag[file_name] = '404 on template'
+
+    return is_signature_present_flag
+
+
+# # test function
+# if __name__ == "__main__":
+#     isSigned = detect_signature("sample.pdf", "sample-modified.pdf", 6, (700, 1600, 1700, 2200))
+#     print(isSigned)

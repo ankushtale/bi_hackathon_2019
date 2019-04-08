@@ -1,0 +1,8 @@
+# to install conda install --file requirements.txt
+
+numpy
+PIL
+pdf2image
+scipy
+scikit-image
+PyPDF2
