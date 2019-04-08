@@ -1,0 +1,155 @@
+body, .container {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 10px;
+    overflow: hidden;
+}
+
+.container-top {
+    height: 10%;
+    width: 100%;
+    position: relative;
+    margin-top: 10px;
+}
+
+.container-center {
+    height: 20%;
+    width: 100%;
+    position: relative;
+    background: #c8dadf;
+    outline: 2px dashed #92b0b3;
+    outline-offset: -10px;
+    margin-top: 10px;
+}
+
+.container-bottom {
+    height: calc(70% - 40px);
+    width: 100%;
+    position: relative;
+    margin-top: 20px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.center-1 {
+    width: 100%;
+    height: 50%;
+    overflow: hidden;
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    /*border: 1px solid purple;*/
+    /*background: bisque;*/
+}
+
+.box_icon {
+    fill: #92b0b3;
+    display: block;
+    width: 100%;
+    height: 50%;
+    overflow: hidden;
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+}
+
+.highlight {
+    background: dodgerblue;
+}
+
+.header {
+    width: 100%;
+    height: 16px;
+    background: #36304a;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.header > div {
+    display: inline-block;
+    margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+    border: 0;
+    float: left;
+    text-align: center;
+}
+
+.combined-row {
+    margin: 2px 0 2px 0;
+    background: #d5d5d6;
+}
+
+.row {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+}
+
+.row > div {
+    display: inline-block;
+    margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+    border: 0;
+    float: left;
+    text-align: center;
+    position: relative;
+    height: 16px;
+}
+
+.signal-top {
+    width: 20%;
+    height: 50%;
+    overflow: hidden;
+    margin: auto;
+    position: absolute;
+    top: 200%; left: 0; bottom: 100%; right: 0;
+}
+
+.signal-bottom {
+    width: 20%;
+    height: 50%;
+    overflow: hidden;
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 100%; right: 0;
+
+}
+
+.highlight-red {
+    background-color: indianred;
+}
+
+.highlight-green {
+    background: #4cae4c;
+}
+
+.barclays-logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 200px;
+    background-image: url("/static/images/barclays-logo.png");
+    background-position: center;
+    background-size: auto;
+    background-repeat: no-repeat;
+}
+
+.hackathon-logo {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 300px;
+    background-image: url("/static/images/Hackathon.png");
+    background-position: center;
+    background-size: auto;
+    background-repeat: no-repeat;
+}

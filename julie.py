@@ -3,7 +3,7 @@ from utils import listdir_full_path
 from page_diff import get_page_number_diffs, get_pages
 from annotations import are_annotations_present, list_annotations_present
 from signature_detection import is_signature_present
-from markup_detection  import is_markup_present
+from markup_detection import is_markup_present
 import json
 import os
 
@@ -45,9 +45,7 @@ def do_the_thing(src_dir):
             file_dict["send_through"] = False
 
         response[file_name] = file_dict
-
-    # pprint.pprint(json.dumps(response))
-    pprint.pprint(response)
+    return response
 
     # print('____________________________________________')
     # print("***********Page Diffs***********")
