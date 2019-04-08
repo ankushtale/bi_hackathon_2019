@@ -33,6 +33,17 @@ def do_the_thing(src_dir):
         file_dict["annotations_flag"] = annotations_flag[file_name]
         file_dict["signature_present"] = signature_detected[file_name]
         file_dict["markup_present"] = markup_present[file_name]
+
+        flag = page_diff_flag[file_name]
+
+        if page_diff_flag[file_name] not in (True, False):
+            flag = False
+
+        if flag and annotations_flag[file_name] and markup_present[file_name]:
+            file_dict["send_through"] = True
+        else:
+            file_dict["send_through"] = False
+
         response[file_name] = file_dict
 
     # pprint.pprint(json.dumps(response))
