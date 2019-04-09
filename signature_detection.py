@@ -113,18 +113,48 @@ def detect_signature(path1: str, path2: str, page_no: int, bounding_box: Tuple) 
 def is_signature_present(files_to_read: list):
 
     is_signature_present_flag = dict()
+    file_prefixes = [os.path.basename(file_prefix).split("_")[0] for file_prefix in files_to_read]
 
-    for file in files_to_read:
-        file_name = os.path.basename(file)
-        prefix = file_name.split('_')[0]
+    unique_file_prefixes = unique_values_in_list(file_prefixes)
 
-        if prefix in signature_location.keys():
-            is_signature_present_flag[file_name] = detect_signature(file,
-                                                                    file,
-                                                                    signature_location[prefix]['page'],
-                                                                    signature_location[prefix]['bounding_box'])
+    for unique_file_prefix in unique_file_prefixes:
+        pair_files = [file for file in files_to_read
+                      if os.path.basename(file).startswith(unique_file_prefix)]
+
+        # Assumes that there are only two files in a pair. No more no less
+        if unique_file_prefix in signature_location.keys():
+            is_signature_present_flag[os.path.basename(pair_files[0])] = detect_signature(pair_files[0],
+                                                                                          pair_files[1],
+                                                                                          signature_location
+                                                                                          [unique_file_prefix]
+                                                                                          ['page'],
+                                                                                          signature_location
+                                                                                          [unique_file_prefix]
+                                                                                          ['bounding_box'])
+            is_signature_present_flag[os.path.basename(pair_files[1])] = detect_signature(pair_files[0],
+                                                                                          pair_files[1],
+                                                                                          signature_location
+                                                                                          [unique_file_prefix]
+                                                                                          ['page'],
+                                                                                          signature_location
+                                                                                          [unique_file_prefix]
+                                                                                          ['bounding_box'])
         else:
-            is_signature_present_flag[file_name] = '404 on template'
+            is_signature_present_flag[os.path.basename(pair_files[0])] = '404 on template'
+            if len(pair_files) == 2:
+                is_signature_present_flag[os.path.basename(pair_files[1])] = '404 on template'
+
+    # for file in files_to_read:
+    #     file_name = os.path.basename(file)
+    #     prefix = file_name.split('_')[0]
+    #
+    #     if prefix in signature_location.keys():
+    #         is_signature_present_flag[file_name] = detect_signature(file,
+    #                                                                 file,
+    #                                                                 signature_location[prefix]['page'],
+    #                                                                 signature_location[prefix]['bounding_box'])
+    #     else:
+    #         is_signature_present_flag[file_name] = '404 on template'
 
     return is_signature_present_flag
 

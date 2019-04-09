@@ -4,7 +4,7 @@ import os
 import json
 from flask import Flask, request
 
-UPLOAD_FOLDER = './uploads'
+UPLOAD_FOLDER = './docs'
 ALLOWED_EXTENSIONS = ('pdf')
 
 app = Flask(__name__, static_url_path='/static', static_folder='./static')

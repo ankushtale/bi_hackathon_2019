@@ -1,18 +1,26 @@
 import pprint
-from utils import listdir_full_path
+from utils import listdir_full_path, fetch_null_response_node
 from page_diff import get_page_number_diffs, get_pages
 from annotations import are_annotations_present, list_annotations_present
 from signature_detection import is_signature_present
-from markup_detection import is_markup_present
+from markup_detection  import is_markup_present
 import json
 import os
 
 
 def do_the_thing(src_dir):
+    """
+    Driver function
+    :param src_dir: Source Directory which contains all files
+    :return: Json response with all data
+    """
 
     files_to_read = listdir_full_path(src_dir)
 
     files_to_read = [file for file in files_to_read if file.endswith('.pdf')]
+
+    if len(files_to_read) == 0:
+        return fetch_null_response_node("No file found")
 
     files_to_read.sort()
 
@@ -45,7 +53,9 @@ def do_the_thing(src_dir):
             file_dict["send_through"] = False
 
         response[file_name] = file_dict
-    return response
+
+    # pprint.pprint(json.dumps(response))
+    pprint.pprint(response)
 
     # print('____________________________________________')
     # print("***********Page Diffs***********")
