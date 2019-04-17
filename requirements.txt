@@ -6,3 +6,11 @@ pdf2image
 scipy
 scikit-image
 PyPDF2
+h5py
+numpy
+opencv
+tensorflow-gpu
+tensorflow-gpu
+keras-applications
+keras
+scikit-learn
