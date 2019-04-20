@@ -1,4 +1,4 @@
-# BI Hackathon 2019
+# BX Hackathon 2019
 
 The code is very shabby as of now and will be refactored in upcoming weeks along with proper documentation of transfer learning, dataset and output.
 
